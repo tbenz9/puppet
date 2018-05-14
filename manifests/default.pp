@@ -13,7 +13,16 @@ user { 'tbenz9':
         uid => '1000',
         shell => '/bin/bash',
         comment => 'Thomas Bennett',
+	home => '/home/tbenz9',
+	managehome => 'true',
+}
 
+file { '/home/tbenz9/.ssh':
+        ensure => 'directory',
+        owner => 'tbenz9',
+        group => 'tbenz9',
+        mode => '600',
+        recurse => 'true',
 }
 
 ssh_authorized_key { 'tbenz9@raspberrypi':
