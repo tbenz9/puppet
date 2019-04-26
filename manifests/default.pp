@@ -62,3 +62,7 @@ class { 'golang':
   goroot      => '',
   workdir     => '/home/tbenz9/go',
 }
+
+vundle::installation { 'tbenz9':
+  plugins => [ 'fatih/vim-go'],
+}
