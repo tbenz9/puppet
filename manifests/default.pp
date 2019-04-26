@@ -37,8 +37,8 @@ ssh_authorized_key { 'tbenz9@raspberrypi':
 
 # packages
 class packages {
-    $packages = [ 'curl', 'vim', 'iotop', 'vnstat' ]
-    package { $enhancers: ensure => 'installed' }
+    $packages = [ 'curl', 'vim', 'iotop', 'vnstat' 'git']
+    package { $packages: ensure => 'installed' }
 }
 
 # Set DNS
