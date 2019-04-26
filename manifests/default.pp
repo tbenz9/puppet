@@ -55,13 +55,9 @@ class { 'ssh::server':
 
 # Set up Golang
 class { 'golang':
-  base_dir    => '/usr/local/go',
-  from_repo   => true,
-  repo_version => 'go1.12',
-  goroot      => '',
-  workdir     => '/home/tbenz9/go',
+  version   => '1.12.4',
+  workspace => '/home/tbenz9/go/',
 }
-
 vundle::installation { 'tbenz9':
   plugins => [ 'fatih/vim-go'],
   require => Package['vim'],
