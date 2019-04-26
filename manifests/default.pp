@@ -1,6 +1,7 @@
 node default {
 	include dnsclient
 	include ssh::server
+    include golang
 }
 
 # User accounts
@@ -35,18 +36,8 @@ ssh_authorized_key { 'tbenz9@raspberrypi':
 }
 
 # packages
-package { 'golang':
-        name => 'golang-go',
-        ensure => 'present',
-}
-package { 'curl':
-        name => 'curl',
-        ensure => 'present',
-}
-package { 'vim':
-        name => 'vim',
-        ensure => 'present',
-}
+$packages = [ 'curl', 'vim', 'iotop', 'vnstat' ]
+package { $enhancers: ensure => 'installed' }
 
 # Set DNS
 class { 'dnsclient':
@@ -61,4 +52,11 @@ class { 'ssh::server':
 		'PermitRootLogin' => 'without-password',
 	}
 }
-		
+
+class { 'golang':
+  base_dir    => '/usr/local/go',
+  from_repo   => true,
+  repo_version => 'go1.12',
+  goroot      => '$GOPATH/bin:/usr/local/go/bin:$PATH',
+  workdir     => '/usr/local/',
+}
