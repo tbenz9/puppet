@@ -36,8 +36,10 @@ ssh_authorized_key { 'tbenz9@raspberrypi':
 }
 
 # packages
-$packages = [ 'curl', 'vim', 'iotop', 'vnstat' ]
-package { $enhancers: ensure => 'installed' }
+class packages {
+    $packages = [ 'curl', 'vim', 'iotop', 'vnstat' ]
+    package { $enhancers: ensure => 'installed' }
+}
 
 # Set DNS
 class { 'dnsclient':
@@ -58,5 +60,5 @@ class { 'golang':
   from_repo   => true,
   repo_version => 'go1.12',
   goroot      => '$GOPATH/bin:/usr/local/go/bin:$PATH',
-  workdir     => '/usr/local/',
+  workdir     => '/home/tbenz9/go',
 }
